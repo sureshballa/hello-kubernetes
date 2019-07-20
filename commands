@@ -1,0 +1,18 @@
+kubectl create namespace hello-world
+kubectl create -f deployment.yml --save-config
+kubectl get deployments -n hello-world
+kubectl get pods -n hello-world
+kubectl create -f service.yml
+kubectl get svc -n hello-world
+kubectl describe services hello-world-service -n hello-world
+kubectl get pods --selector="app=hello-world" --output=wide -n hello-world
+minikube service hello-world-service -n hello-world
+
+kubectl logs hello-world-deployment-575f7b85b6-xppjg hello-world -n hello-world
+
+minikube service list
+
+
+Can't expose service?
+https://github.com/kubernetes/minikube/issues/2614
+
