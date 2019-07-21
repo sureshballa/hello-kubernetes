@@ -1,4 +1,6 @@
 kubectl create namespace hello-world
+To enable istio side car
+kubectl label namespace hello-world istio-injection=enabled
 kubectl create -f deployment.yml --save-config
 kubectl get deployments -n hello-world
 kubectl get pods -n hello-world
@@ -15,4 +17,20 @@ minikube service list
 
 Can't expose service?
 https://github.com/kubernetes/minikube/issues/2614
+
+
+
+Clean up commands:
+
+kubectl delete service hello-world-service -n hello-world
+kubectl delete deployment hello-world-deployment -n hello-world
+
+minikube start --cpus 4 --memory 8192
+
+List Containers by Pod
+kubectl get pods --all-namespaces -o=jsonpath='{range .items[*]}{"\n"}{.metadata.name}{":\t"}{range .spec.containers[*]}{.image}{", "}{end}{end}' |\
+sort
+
+
+==============================================
 
